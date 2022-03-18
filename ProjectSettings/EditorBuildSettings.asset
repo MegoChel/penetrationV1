@@ -7,4 +7,5 @@ EditorBuildSettings:
   m_Scenes: []
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 908ac5620ed31a54b9ffb15b682a071a, type: 2}
+    Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 0adb71249598e234b8a1c0279363ca1d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 8f9c5ebeb7370864f86ac46f1ed00844, type: 2}
