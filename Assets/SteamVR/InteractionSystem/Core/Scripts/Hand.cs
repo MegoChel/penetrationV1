@@ -1238,10 +1238,7 @@ namespace Valve.VR.InteractionSystem
         protected const float AngularVelocityMagic = 50f;
         protected const float MaxAngularVelocityChange = 20f;
 
-        protected Vector3 VectorMul(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.x * Math.Abs(b.x), a.y * Math.Abs(b.y), a.z * Math.Abs(b.z));
-        }
+
 
         protected void UpdateAttachedVelocity(AttachedObject attachedObjectInfo)
         {
@@ -1253,9 +1250,7 @@ namespace Valve.VR.InteractionSystem
                 float maxAngularVelocityChange = MaxAngularVelocityChange * scale;
                 float maxVelocityChange = MaxVelocityChange * scale;
 
-                //attachedObjectInfo.attachedRigidbody.velocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.velocity, velocityTarget, maxVelocityChange);
-                attachedObjectInfo.attachedRigidbody.velocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.velocity, velocityTarget, maxVelocityChange);
-                
+                attachedObjectInfo.attachedRigidbody.velocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.velocity, velocityTarget, maxVelocityChange);                
                 attachedObjectInfo.attachedRigidbody.angularVelocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.angularVelocity, angularTarget, maxAngularVelocityChange);
             }
         }
@@ -1310,13 +1305,9 @@ namespace Valve.VR.InteractionSystem
 
             Vector3 targetItemPosition = TargetItemPosition(attachedObjectInfo);
             Vector3 positionDelta = (targetItemPosition - attachedObjectInfo.attachedRigidbody.position);
-            //velocityTarget = VectorMul((positionDelta * velocityMagic * Time.deltaTime), taxe.right);
 
             velocityTarget = (positionDelta * velocityMagic * Time.deltaTime);
-            velocityTarget = Vector3.Project(velocityTarget, taxe.right.normalized);
-            //velocityTarget = VectorMul(velocityTarget, taxe.right.normalized);
-            float x = taxe.transform.localPosition.x;
-            //velocityTarget = new Vector3(x, 0, 0);
+            //velocityTarget = Vector3.Project(velocityTarget, taxe.right.normalized);
 
 
 			if (float.IsNaN(velocityTarget.x) == false && float.IsInfinity(velocityTarget.x) == false)
@@ -1332,7 +1323,7 @@ namespace Valve.VR.InteractionSystem
             Quaternion targetItemRotation = TargetItemRotation(attachedObjectInfo);
             Quaternion rotationDelta = targetItemRotation * Quaternion.Inverse(attachedObjectInfo.attachedObject.transform.rotation);
 
-            Vector3 povorot = taxe.rotation.eulerAngles.normalized;
+            Vector3 povorot = taxe.transform.forward;
 
 			float angle;
 			Vector3 axis;
@@ -1344,7 +1335,7 @@ namespace Valve.VR.InteractionSystem
 			if (angle != 0 && float.IsNaN(axis.x) == false && float.IsInfinity(axis.x) == false)
 			{
 				angularTarget = angle * axis * angularVelocityMagic * Time.deltaTime;
-                angularTarget = Vector3.Project(angularTarget, povorot);
+                //angularTarget = Vector3.Project(angularTarget, povorot);
 				if (noSteamVRFallbackCamera)
 					angularTarget /= 10; //hacky fix for fallback
 

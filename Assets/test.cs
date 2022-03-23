@@ -14,7 +14,7 @@ public class test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(cube.transform.rotation.eulerAngles);
+        
     }
 
 	//private void OnCollisionEnter(Collision collision)
