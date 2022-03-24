@@ -14,7 +14,7 @@ public class testAngles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.rotation.eulerAngles.normalized);
+        //Debug.Log(transform.rotation.eulerAngles.normalized);
         //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + 0.1f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
 }

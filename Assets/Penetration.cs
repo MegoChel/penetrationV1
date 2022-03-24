@@ -47,11 +47,13 @@ public class Penetration : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-        isPenetrating = true;
+        if (other.gameObject.tag == "Wood")
+            isPenetrating = true;
     }
 
 	private void OnTriggerExit(Collider other)
 	{
+
         isPenetrating = false;
     }
 
@@ -76,9 +78,10 @@ public class Penetration : MonoBehaviour
 		Grip.GetComponent<Collider>().isTrigger = true;
 		HoldigHand = hand;
         if (ve == null)
+		{
             ve = HoldigHand.gameObject.AddComponent<VelocityEstimator>();
-        ve.BeginEstimatingVelocity();
-        
+            ve.BeginEstimatingVelocity();
+        }
 	}
 
     public void UpdateObjVelocity()
